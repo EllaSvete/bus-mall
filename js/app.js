@@ -89,7 +89,7 @@ function renderImgs(){
 
 renderImgs();
 
-// ***** Event Listeners ******
+// ***** Event Listeners *******
 
 function handleClick(event){
   votesAllowed--;
