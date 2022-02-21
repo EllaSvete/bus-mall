@@ -4,7 +4,7 @@ console.log ('what up!');
 
 // Global Variables
 
-let votesAllowed = 5; // decrement -- to end voting round
+let votesAllowed = 25; // decrement -- to end voting round
 
 //Product storage
 
