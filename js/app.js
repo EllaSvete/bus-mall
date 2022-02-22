@@ -20,6 +20,9 @@ let imgThree = document.getElementById('img-three');
 let resultsBtn = document.getElementById('show-results-btn');
 let showResults = document.getElementById('display-results-list');
 
+// Canvas element for chart.js
+let ctx = document.getElementById('my-chart');
+
 // ***** Constructor *****
 
 function Product(name, fileExtension = 'jpeg'){
@@ -60,19 +63,30 @@ function getRandomIndex() {
   return Math.floor(Math.random()* allProducts.length);
 }
 
+let randomIndexes = [];
 
 // render images
 function renderImgs(){
-  let prodOneIndex = getRandomIndex();
-  let prodTwoIndex = getRandomIndex();
-  let prodThreeIndex = getRandomIndex();
 
-  while(prodOneIndex === prodTwoIndex){
-    prodTwoIndex = getRandomIndex();
+  while(randomIndexes.length < 6){
+    let randoProd = getRandomIndex();
+    while(!randomIndexes.includes(randoProd)){
+      randomIndexes.push(randoProd);
+    }
   }
-  while(prodThreeIndex === prodOneIndex || prodThreeIndex === prodTwoIndex){
-    prodThreeIndex = getRandomIndex();
-  }
+  
+  // while(prodOneIndex === prodTwoIndex){
+  //   prodTwoIndex = getRandomIndex();
+  // }
+  // while(prodThreeIndex === prodOneIndex || prodThreeIndex === prodTwoIndex){
+  //   prodThreeIndex = getRandomIndex();
+  // }
+  
+  let prodOneIndex = randomIndexes.shift();
+  let prodTwoIndex = randomIndexes.shift();
+  let prodThreeIndex = randomIndexes.shift();
+
+
 
   imgOne.src = allProducts[prodOneIndex].src;
   imgOne.alt = allProducts[prodTwoIndex].name;
@@ -106,20 +120,75 @@ function handleClick(event){
 
   if(votesAllowed === 0){
     myContainer.removeEventListener('click', handleClick);
+
+    renderChart();
   }
 }
 
-function handleShowResults(event){
+// function handleShowResults(event){
 
-  if(votesAllowed === 0){
-    for(let i = 0; i < allProducts.length; i++){
-      let li = document.createElement('li');
-      li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
-      showResults.appendChild(li);
-    }
+//   if(votesAllowed === 0){
+//     for(let i = 0; i < allProducts.length; i++){
+//       let li = document.createElement('li');
+//       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
+//       showResults.appendChild(li);
+//     }
+//   }
+// }
+
+// function that will render the chart once the voting round is done
+
+function renderChart() {
+  let prodNames = [];
+  let prodClicks = [];
+  let prodViews = [];
+
+  for (let i = 0; i < allProducts.length; i++){
+    prodNames.push(allProducts[i].name);
+    prodClicks.push(allProducts[i].clicks);
+    prodViews.push(allProducts[i].views);
   }
+
+  let chartObject = {
+    type: 'bar',
+    data: {
+      labels: prodNames,
+      datasets: [{
+        label: '# of Click',
+        data: prodClicks,
+        backgroundColor: [
+          'red'
+        ],
+        borderColor: [
+          'red'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      },
+      {
+        label: '# of Views',
+        data: prodViews,
+        backgroundColor: [
+          'blue'
+        ],
+        borderColor: [
+          'blue'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  const myChart = new Chart(ctx, chartObject);
 }
 
 myContainer.addEventListener('click', handleClick);
 
-resultsBtn.addEventListener('click', handleShowResults);
+// resultsBtn.addEventListener('click', handleShowResults);
