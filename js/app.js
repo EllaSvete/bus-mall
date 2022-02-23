@@ -23,6 +23,20 @@ let showResults = document.getElementById('display-results-list');
 // Canvas element for chart.js
 let ctx = document.getElementById('my-chart');
 
+// ***** local storage continued ******
+
+// step 3: get it out of local storage
+let retrievedProds = localStorage.getItem('products');
+
+console.log('retrieved products', retrievedProds);
+
+// step 4: Parse our data for our code to read
+
+let parsedProds = JSON.parse(retrievedProds);
+
+console.log('parsed prods', parsedProds);
+
+
 // ***** Constructor *****
 
 function Product(name, fileExtension = 'jpeg'){
@@ -34,25 +48,33 @@ function Product(name, fileExtension = 'jpeg'){
   allProducts.push(this);
 }
 
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
+// ***** Local Storage
+// Step : 5 Use the data that came out of localStorage
+
+if(retrievedProds){
+  allProducts = parsedProds;
+} else {
+  new Product('bag');
+  new Product('banana');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep', 'png');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('water-can');
+  new Product('wine-glass');
+
+}
 
 console.log(allProducts);
 
@@ -63,28 +85,23 @@ function getRandomIndex() {
   return Math.floor(Math.random()* allProducts.length);
 }
 
-let randomIndexes = [];
+let randomIndexes = []; // will be populated with 6 unique numbers
+// push - add to the end of the array [2,3,10,17,1,5]
 
 // render images
-function renderImgs(){
+function renderImgs() {
 
-  while(randomIndexes.length < 6){
+  while(randomIndexes.length < 6) {
     let randoProd = getRandomIndex();
-    while(!randomIndexes.includes(randoProd)){
+    while(!randomIndexes.includes(randoProd)) {
       randomIndexes.push(randoProd);
     }
   }
-  
-  // while(prodOneIndex === prodTwoIndex){
-  //   prodTwoIndex = getRandomIndex();
-  // }
-  // while(prodThreeIndex === prodOneIndex || prodThreeIndex === prodTwoIndex){
-  //   prodThreeIndex = getRandomIndex();
-  // }
-  
-  let prodOneIndex = randomIndexes.shift();
-  let prodTwoIndex = randomIndexes.shift();
-  let prodThreeIndex = randomIndexes.shift();
+
+  let prodOneIndex = randomIndexes.shift(); // 2
+  let prodTwoIndex = randomIndexes.shift(); // 3
+  let prodThreeIndex = randomIndexes.shift(); // 10
+  // shift re-indexes
 
 
 
@@ -100,6 +117,13 @@ function renderImgs(){
   imgThree.alt = allProducts[prodThreeIndex].name;
   allProducts[prodThreeIndex].views++;
 }
+
+// while(prodOneIndex === prodTwoIndex){
+//   prodTwoIndex = getRandomIndex();
+// }
+// while(prodThreeIndex === prodOneIndex || prodThreeIndex === prodTwoIndex){
+//   prodThreeIndex = getRandomIndex();
+// } this is old code from above ^
 
 renderImgs();
 
@@ -122,6 +146,15 @@ function handleClick(event){
     myContainer.removeEventListener('click', handleClick);
 
     renderChart();
+
+    // ***** local storage begins ****** 
+
+    // step 1: Stringify Data
+    let stringifiedProds = JSON.stringify(allProducts);
+    console.log('Stringified Prods', stringifiedProds);
+
+    // Step 2: Set item into local Storage
+    localStorage.setItem('products', stringifiedProds);
   }
 }
 
