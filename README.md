@@ -41,8 +41,8 @@ Bus Mall
 I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
 
 Author: Ella Svete
-submission PR
+submission PR: https://github.com/EllaSvete/bus-mall/tree/local-storage
 Goat Demo
 Reflections and Comments
-Consider including the answers to your daily journal and submission questions here
-This is also a good place to reflect on the tools and resources used and learned
+
+This was a good lab for going over how storage works, which is something I knew nothing about. I'm still kind of grasping the concept and why it is important. I feel good about how I did this lab, watching the demo's really helped me. I feel good about today being a lighter load because I have my meetup tonight.
