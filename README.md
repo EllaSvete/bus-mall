@@ -38,11 +38,24 @@ LAB - 13
 
 Bus Mall
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
+Implement local storage for this website.
 
 Author: Ella Svete
 submission PR: https://github.com/EllaSvete/bus-mall/tree/local-storage
 Goat Demo
 Reflections and Comments
 
-This was a good lab for going over how storage works, which is something I knew nothing about. I'm still kind of grasping the concept and why it is important. I feel good about how I did this lab, watching the demo's really helped me. I feel good about today being a lighter load because I have my meetup tonight.
+- This was a good lab for going over how storage works, which is something I knew nothing about. I'm still kind of grasping the concept and why it is important. I feel good about how I did this lab, watching the demo's really helped me. I feel good about today being a lighter load because I have my meetup tonight.
+
+LAB - 15
+
+Bus Mall
+
+Ensure all previous labs are completed and you have a reasonable amount of CSS features.
+
+Author: Ella Svete
+submission PR: 
+Goat Demo
+Reflections and Comments
+
+- This was a great lab for getting some fundamentals down. I thought building the graphs in JS was cool and an accessible way to learn about parent/child appends.
