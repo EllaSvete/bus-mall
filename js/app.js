@@ -189,8 +189,9 @@ function renderChart() {
       datasets: [{
         label: '# of Click',
         data: prodClicks,
+
         backgroundColor: [
-          'red'
+          'orange'
         ],
         borderColor: [
           'red'
@@ -202,10 +203,10 @@ function renderChart() {
         label: '# of Views',
         data: prodViews,
         backgroundColor: [
-          'blue'
+          'white'
         ],
         borderColor: [
-          'blue'
+          'orange'
         ],
         borderWidth: 1
       }]
